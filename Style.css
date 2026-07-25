@@ -1,0 +1,407 @@
+/* ==========================================================================
+   ENHANCED COLOR PALETTE & DESIGN SYSTEM
+   ========================================================================== */
+:root {
+    --bg-dark: #070913;
+    --card-bg: rgba(15, 23, 42, 0.65);
+    --card-border: rgba(56, 189, 248, 0.2);
+    
+    /* Vibrant Neon Accents */
+    --neon-cyan: #00f0ff;
+    --neon-purple: #7000ff;
+    --neon-pink: #ff007f;
+    --electric-blue: #0066ff;
+    
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --font-heading: 'Plus Jakarta Sans', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-heading);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Canvas for JavaScript Animation */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Ambient Neon Glows */
+.bg-glow {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: -1;
+    opacity: 0.25;
+    pointer-events: none;
+    animation: floatGlow 12s ease-in-out infinite alternate;
+}
+
+.glow-1 { top: -100px; left: -100px; background: var(--neon-cyan); }
+.glow-2 { top: 50%; right: -150px; background: var(--neon-purple); animation-delay: -4s; }
+.glow-3 { bottom: -100px; left: 30%; background: var(--neon-pink); animation-delay: -8s; }
+
+@keyframes floatGlow {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, 50px) scale(1.15); }
+}
+
+/* ==========================================================================
+   TYPOGRAPHY & GRADIENTS
+   ========================================================================== */
+h1, h2, h3, h4 { color: #fff; font-weight: 700; }
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShimmer 4s linear infinite;
+}
+
+@keyframes textShimmer {
+    to { background-position: 200% center; }
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1.2rem;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.badge i {
+    font-size: 0.6rem;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ==========================================================================
+   BUTTONS & INTERACTIVITY
+   ========================================================================== */
+.btn-primary {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--electric-blue));
+    color: #050811;
+    font-weight: 700;
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-main);
+    border: 1px solid var(--card-border);
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   LAYOUT & CARDS (GLASS-MORPHISM)
+   ========================================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 8%;
+    background: rgba(7, 9, 19, 0.75);
+    backdrop-filter: blur(15px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.logo {
+    font-family: var(--font-code);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo span { color: var(--neon-cyan); }
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--neon-cyan); }
+
+.hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 10%;
+}
+
+.hero h1 {
+    font-size: 3.6rem;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 750px;
+    margin: 0 auto 2.5rem;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+}
+
+.section { padding: 6rem 8%; }
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-header p { color: var(--text-muted); }
+
+/* Glass Cards */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(16px);
+    border-radius: 18px;
+    padding: 2.5rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.card:hover::before { left: 100%; }
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.service-card .icon-box {
+    width: 60px; height: 60px;
+    border-radius: 12px;
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: var(--neon-cyan);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.service-card h3 { margin-bottom: 0.75rem; font-size: 1.25rem; }
+.service-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* Skill Tags */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.skill-category h4 {
+    margin-bottom: 1.5rem;
+    color: var(--neon-cyan);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+.tags span {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--card-border);
+    color: var(--text-main);
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+
+.tags span:hover {
+    background: rgba(0, 240, 255, 0.15);
+    border-color: var(--neon-cyan);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+/* Contact Details Cards */
+.contact-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+}
+
+.contact-card {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.contact-card .icon {
+    font-size: 1.5rem;
+    color: var(--neon-cyan);
+    margin-bottom: 0.5rem;
+}
+
+.contact-card h4 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+}
+
+.contact-card p, .contact-card a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    color: var(--neon-cyan);
+}
+
+/* Contact Form Styling */
+.form-group { margin-bottom: 1.5rem; text-align: left; }
+label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    background: rgba(5, 8, 17, 0.6);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    color: #fff;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.btn-block { width: 100%; justify-content: center; }
+
+footer {
+    text-align: center;
+    padding: 3rem;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.4rem; }
+    .nav-links { display: none; }
+    .cta-group { flex-direction: column; }
+}
